@@ -23,25 +23,30 @@
       (keep-indexed #(if (not= %1 n) %2) coll))
 
 (defn report-safe-with-dampener? [levels]
-      (not-empty (filter report-safe? (map #(drop-nth % levels) (range (count levels))))))
+      (->> (range (count levels))
+           (map #(drop-nth % levels))
+           (filter report-safe?)
+           (not-empty)))
 
 (defn safe-report-count [reports] (count (filter report-safe? reports)))
 
 (defn safe-report-with-dampener-count [reports] (count (filter report-safe-with-dampener? reports)))
 
 (defn solve-one [input-path]
-      (println
-        (safe-report-count
-          (map (comp #(map ^[String] Integer/parseInt %) #(str/split % #" "))
-               (input-reader/read-lines input-path)))))
+      (->> input-path
+           (input-reader/read-lines)
+           (map (comp #(map ^[String] Integer/parseInt %) #(str/split % #" ")))
+           (safe-report-count)
+           (println)))
 
 (defn solve-two [input-path]
-      (println
-        (safe-report-with-dampener-count
-          (map (comp #(map ^[String] Integer/parseInt %) #(str/split % #" "))
-               (input-reader/read-lines input-path)))))
+      (->> input-path
+           (input-reader/read-lines)
+           (map (comp #(map ^[String] Integer/parseInt %) #(str/split % #" ")))
+           (safe-report-with-dampener-count)
+           (println)))
 
-;(solve-one "./problem-input/two/example.txt")
-;(solve-one "./problem-input/two/problem.txt")
-;(solve-two "./problem-input/two/example.txt")
-;(solve-two "./problem-input/two/problem.txt")
+(solve-one "./problem-input/two/example.txt")
+(solve-one "./problem-input/two/problem.txt")
+(solve-two "./problem-input/two/example.txt")
+(solve-two "./problem-input/two/problem.txt")
