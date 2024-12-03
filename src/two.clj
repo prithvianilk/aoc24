@@ -46,7 +46,7 @@
            (safe-report-with-dampener-count)
            (println)))
 
-(solve-one "./problem-input/two/example.txt")
+(solve-one "./problem-input/two/example_1.txt")
 (solve-one "./problem-input/two/problem.txt")
-(solve-two "./problem-input/two/example.txt")
+(solve-two "./problem-input/two/example_1.txt")
 (solve-two "./problem-input/two/problem.txt")

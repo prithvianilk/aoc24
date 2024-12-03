@@ -31,7 +31,7 @@
         [[x y] (read-input input-path)]
         (println (similarity-score x y))))
 
-(solve-first "./problem-input/one/example.txt")
+(solve-first "./problem-input/one/example_1.txt")
 (solve-first "./problem-input/one/problem.txt")
-(solve-second "./problem-input/one/example.txt")
+(solve-second "./problem-input/one/example_1.txt")
 (solve-second "./problem-input/one/problem.txt")
