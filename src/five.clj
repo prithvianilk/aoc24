@@ -46,3 +46,25 @@
              (filter #(correctly-ordered? % ordering-rules))
              (map seq-middle)
              (reduce +))))
+
+(defn get-correct-ordering
+      ([page ordering-rules]
+       (let [potential-correct-ordering (get-correct-ordering (rest page) (first page) ordering-rules)]
+         (if (= potential-correct-ordering page)
+           page
+           (get-correct-ordering potential-correct-ordering ordering-rules))))
+
+      ([page prev ordering-rules]
+       (cond
+         (empty? page) [prev]
+         (contains? (ordering-rules prev) (first page)) (concat [prev] (get-correct-ordering (rest page) (first page) ordering-rules))
+         :else (concat [(first page)] (get-correct-ordering (rest page) prev ordering-rules)))))
+
+(defn solve-two [input-path]
+      (let [{ordering-rules :ordering-rules pages-to-produce :pages-to-produce}
+            (get-rules-and-pages input-path)]
+        (->> pages-to-produce
+             (filter #(not (correctly-ordered? % ordering-rules)))
+             (map #(get-correct-ordering % ordering-rules))
+             (map seq-middle)
+             (reduce +))))
