@@ -68,3 +68,8 @@
              (map #(get-correct-ordering % ordering-rules))
              (map seq-middle)
              (reduce +))))
+
+;(five/solve-one "./problem-input/five/example.txt")
+;(five/solve-one "./problem-input/five/problem.txt")
+;(five/solve-two "./problem-input/five/example.txt")
+;(five/solve-two "./problem-input/five/problem.txt")
